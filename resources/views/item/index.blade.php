@@ -7,11 +7,15 @@
 <div class="container-fluid p-5">
 <h1>商品説明</h1>
 <hr>
+@if ($errors->any())
+@foreach ($errors->all() as $error)
+<h3>{{ $error }}</h3>
+@endforeach
+@endif
 <table class="table table-striped">
 <thead class="thead-dark">
 <tr>
 <th>name</th>
-<th>description</th>
 <th>price</th>
 <th>stock</th>
 </tr>
@@ -20,13 +24,12 @@
 @foreach ($items as $item)
 <tr>
 <td><a href="{{ route('item.detail', ['id' => $item->id]) }}">{{ $item->name }}</a></td>
-<td>{{ $item->description }}</td>
 <td>{{ $item->price }}</td>
 <td>
 @if ($item->stock > 1)
 在庫あり
 @else
-在庫なし
+在庫無し
 @endif
 </td>
 </tr>
