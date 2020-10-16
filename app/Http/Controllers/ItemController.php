@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class ItemController extends Controller {
 	public function index() {
 		$items = Item::all();
-		return view('item.index', ['items' => $items]);
+		return view('item.index', compact('items'));
 	}
 	public function detail($id) {
 		try {
@@ -20,6 +20,6 @@ class ItemController extends Controller {
 			$error = '指定した商品は存在しません';
 			return redirect('item/index')->withErrors($error)->withInput();
 		}
-		return view('item.detail', ['item' => $item]);
+		return view('item.detail', compact('item'));
 	}
 }
