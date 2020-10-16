@@ -3,9 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+	public function isAdminRoute() {
+		$bool =strpos(\Route::currentRouteName(), 'admin') !== false;
+		return $bool;
+	}
+	public function getUser() {
+		if ($this->isAdminRoute()) {
+			return Auth::guarf('admin')->user();
+		} else {
+			return Auth::guard('user')->user();
+		}
+	}
     /**
      * Create a new controller instance.
      *
