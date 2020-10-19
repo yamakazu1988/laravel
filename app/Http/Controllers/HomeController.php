@@ -13,7 +13,7 @@ class HomeController extends Controller
 	}
 	public function getUser() {
 		if ($this->isAdminRoute()) {
-			return Auth::guarf('admin')->user();
+			return Auth::guard('admin')->user();
 		} else {
 			return Auth::guard('user')->user();
 		}
@@ -37,4 +37,10 @@ class HomeController extends Controller
     {
         return view('home');
     }
+	public function banUser() {
+		return redirect()->route('home');
+	}
+	public function banAdmin() {
+		return redirect()->route('admin.home');
+	}
 }
