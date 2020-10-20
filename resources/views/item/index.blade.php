@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-</head>
+@extends('layouts.app')
+<?php $now_route = \Route::currentRouteName(); ?>
+@section('content')
 <body>
 <div class="container-fluid p-5">
-<h1>商品説明</h1>
+<h1>商品一覧</h1>
 <hr>
 @if ($errors->any())
 @foreach ($errors->all() as $error)
 <h3>{{ $error }}</h3>
 @endforeach
+@endif
+@if (strpos($now_route, 'admin') !== false)
+	<p><a href="{{ route('admin.item.add') }}">商品追加</a></p>
+@elseif (strpos($now_route, 'admin') !== false)
+@else
 @endif
 <table class="table table-striped">
 <thead class="thead-dark">
@@ -24,7 +26,11 @@
 <tbody>
 @foreach ($items as $item)
 <tr>
+@if (strpos($now_route, 'admin') !== false)
+<td><a href="{{ route('admin.item.detail', ['id' => $item->id]) }}">{{ $item->name }}</a></td>
+@elseif (strpos($now_route, 'admin') === false)
 <td><a href="{{ route('item.detail', ['id' => $item->id]) }}">{{ $item->name }}</a></td>
+@endif
 <td>{{ $item->price }}</td>
 <td>
 @if ($item->stock > 1)
@@ -39,4 +45,4 @@
 </table>
 </div>
 </body>
-</html>
+@endsection

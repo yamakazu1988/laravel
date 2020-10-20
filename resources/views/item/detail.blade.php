@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-</head>
+@extends('layouts.app')
+<?php $now_route = \Route::currentRouteName(); ?>
+@section('content')
 <body>
 <div class="container-fluid p-5">
 <h2>{{ $item->name }}</h2>
@@ -29,7 +26,12 @@
 </tr>
 </tbody>
 </table>
-<a href="{{ route('item.index') }}">商品一覧へ</a>
+@if (strpos($now_route, 'admin') !== false)
+<p><a href="{{ route('admin.item.edit') }}?id={{ $item->id }}">編集</a></p>
+<p><a href="{{ route('admin.item.index') }}">商品一覧へ</a></p>
+@elseif (strpos($now_route, 'admin') === false)
+<p><a href="{{ route('item.index') }}">商品一覧へ</a></p>
+@endif
 </div>
 </body>
-</html>
+@endsection

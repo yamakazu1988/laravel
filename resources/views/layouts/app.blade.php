@@ -14,7 +14,7 @@
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 @if (strpos($now_route, 'admin') !== false)
-	<style>body{background-color: #660000;}</style>
+	<style>body{background-color: #FFEEFF;}</style>
 @endif
 </head>
 <body>
