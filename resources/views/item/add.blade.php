@@ -24,19 +24,19 @@
 <tbody>
 <tr>
 <td>name</td>
-<td><input type="text" name="name"></td>
+<td><input type="text" name="name" value="{{ old('name') }}"></td>
 </tr>
 <tr>
 <td>description</td>
-<td><textarea cols="30" rows="5" name="description"></textarea></td>
+<td><textarea cols="30" rows="5" name="description">{{ old('description') }}</textarea></td>
 </tr>
 <tr>
 <td>price</td>
-<td><input type="text" name="price"></td>
+<td><input type="text" name="price" value="{{ old('price') }}"></td>
 </tr>
 <tr>
 <td>stock</td>
-<td><input type="text" name="stock"></td>
+<td><input type="text" name="stock" value="{{ old('stock') }}"></td>
 </tr>
 </tbody>
 </table>

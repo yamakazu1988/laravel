@@ -31,17 +31,29 @@
 <tr>
 <td>name</td>
 <td>{{ $item->name }}</td>
+@if ($errors->any())
+<td><input type="text" name="name" value="{{ old('name') }}"></td>
+@else
 <td><input type="text" name="name" value="{{ $item->name }}"></td>
+@endif
 </tr>
 <tr>
 <td>description</td>
 <td>{{ $item->description }}</td>
+@if ($errors->any())
+<td><textarea cols="30" rows="5" name="description">{{ old('description') }}</textarea></td>
+@else
 <td><textarea cols="30" rows="5" name="description">{{ $item->description }}</textarea></td>
+@endif
 </tr>
 <tr>
 <td>stock</td>
 <td>{{ $item->stock }}</td>
+@if ($errors->any())
+<td><input type="text" name="stock" value="{{ old('stock') }}"></td>
+@else
 <td><input type="text" name="stock" value="{{ $item->stock }}"></td>
+@endif
 </tr>
 </tbody>
 </table>
