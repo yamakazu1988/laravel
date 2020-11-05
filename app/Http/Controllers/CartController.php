@@ -34,14 +34,17 @@ class CartController extends Controller {
 	public function add(Request $request) {
 		$item_id = $request->input('item_id');
 		if ($this->cart->add_db($item_id, 1)) {
-			return redirect('/cart/index')->with('message_success', '商品をカートに追加しました');
+			session()->flash('msg_success', '商品をカートに追加しました');
+			return redirect('/cart/index');
 		} else {
-			return redirect('/cart/index')->with('message_success', '商品の在庫がありません');
+			session()->flash('msg_error', '商品の在庫がありません');
+			return redirect('/cart/index');
 		}
 	}
 	public function delete(Request $request) {
 		$cart_id = $request->input('cart_id');
 		$this->cart->soft_delete_db($cart_id);
-		return redirect('/cart/index')->with('message_success', 'カート内の商品を削除しました');
+		session()->flash('msg_success', 'カート内の商品を削除しました');
+		return redirect('/cart/index');
 	}
 }

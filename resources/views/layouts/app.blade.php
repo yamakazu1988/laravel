@@ -93,14 +93,14 @@
 </div>
 </nav>
 <script type="text/javascript">
-@if (Session::has('message_success'))
+@if (Session('msg_success'))
 $(function() {
-	toastr.success('{{ session('message_success') }}');
+	toastr.success('{{ session('msg_success') }}');
 });
 @endif
-@if (Session::has('message_danger'))
+@if (Session('msg_error'))
 $(function() {
-	toastr.danger('{{ session('message_danger') }}');
+	toastr.error('{{ session('msg_error') }}');
 });
 @endif
 </script>

@@ -48,7 +48,7 @@
 </tr>
 </tbody>
 </table>
-<p><button type="submit">新規登録</button></p>
+<p><button type="submit">登録</button></p>
 </form>
 <p><a href="{{ route('address.index') }}">住所一覧へ戻る</a></p>
 </body>

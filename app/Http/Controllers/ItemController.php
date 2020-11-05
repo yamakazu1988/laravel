@@ -52,7 +52,8 @@ class ItemController extends Controller {
 		$item->price = $request->price;
 		$item->stock = $request->stock;
 		$item->save();
-		return redirect(route('admin.item.index'))->with('message_success', '商品を登録しました');
+		session()->flash('msg_success', '商品を登録しました');
+		return redirect(route('admin.item.index'));
 	}
 	public function edit(Request $request) {
 		try {
@@ -74,6 +75,7 @@ class ItemController extends Controller {
 		$item->description = $request->description;
 		$item->stock = $request->stock;
 		$item->save();
-		return redirect(route('admin.item.detail', compact('item')))->with('message_success', '商品内容を編集しました');
+		session()->flash('msg_success', '商品内容を編集しました');
+		return redirect(route('admin.item.detail', compact('item')));
 	}
 }
