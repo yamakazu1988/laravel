@@ -4,6 +4,20 @@
 <body>
 <div class="container-fluid p-5">
 <h2>{{ $item->name }}</h2>
+<br>
+@if (Auth::guest())
+ログインしてください
+@else
+@if ($item->stock > 0)
+<form method="post" action="{{ route('cart.add') }}">
+{{ csrf_field() }}
+<td><input type="hidden" name="item_id" value="{{ $item->id }}"></td>
+<p><button type="submit">商品追加</button></p>
+</form>
+@else
+在庫無し
+@endif
+@endif
 <table class="table table-striped">
 <thead class="thead-dark">
 <tr>
@@ -17,7 +31,7 @@
 <td>{{ $item->description }}</td>
 <td>{{ $item->price }}</td>
 <td>
-@if ($item->stock > 1)
+@if ($item->stock > 0)
 在庫あり
 @else
 在庫無し

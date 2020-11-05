@@ -27,7 +27,11 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'admin/item/index';
+//    protected $redirectTo = 'admin/item/index';
+	public function redirectTO() {
+		session()->flash('message_success', 'ログインしました');
+		return '/admin/item/index';
+	}
 
 	public function showLoginForm() {
 		return view('auth.login');
@@ -46,6 +50,7 @@ class LoginController extends Controller
 	}
 	public function logout(Request $request) {
 		Auth::guard('admin')->logout();
+		session()->flash('message_success', 'ログアウトしました');
 		return redirect('admin/login');
 	}
 }

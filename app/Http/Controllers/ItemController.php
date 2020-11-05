@@ -22,10 +22,9 @@ class ItemController extends Controller {
 			return Auth::guard('user')->user();
 		}
 	}
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//	public function __construct() {
+//		$this->middleware('auth');
+//	}
 	public function index() {
 		$items = Item::all();
 		return view('item.index', compact('items'));
@@ -43,7 +42,6 @@ class ItemController extends Controller {
 		}
 		return view('item.detail', compact('item'));
 	}
-
 	public function add() {
 		return view('item.add');
 	}
@@ -54,7 +52,7 @@ class ItemController extends Controller {
 		$item->price = $request->price;
 		$item->stock = $request->stock;
 		$item->save();
-		return redirect(route('admin.item.index'));
+		return redirect(route('admin.item.index'))->with('message_success', '商品を登録しました');
 	}
 	public function edit(Request $request) {
 		try {
@@ -76,6 +74,6 @@ class ItemController extends Controller {
 		$item->description = $request->description;
 		$item->stock = $request->stock;
 		$item->save();
-		return redirect(route('admin.item.detail', compact('item')));
+		return redirect(route('admin.item.detail', compact('item')))->with('message_success', '商品内容を編集しました');
 	}
 }

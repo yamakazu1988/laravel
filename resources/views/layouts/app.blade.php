@@ -16,6 +16,9 @@
 @if (strpos($now_route, 'admin') !== false)
 	<style>body{background-color: #FFEEFF;}</style>
 @endif
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
 <body>
 <div id="app">
@@ -89,8 +92,21 @@
 </div>
 </div>
 </nav>
-
+<script type="text/javascript">
+@if (Session::has('message_success'))
+$(function() {
+	toastr.success('{{ session('message_success') }}');
+});
+@endif
+@if (Session::has('message_danger'))
+$(function() {
+	toastr.danger('{{ session('message_danger') }}');
+});
+@endif
+</script>
+<main class="mt-4">
 @yield('content')
+</main>
 </div>
 
 <!-- Scripts -->

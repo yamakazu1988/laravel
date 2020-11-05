@@ -27,7 +27,11 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'item/index';
+//    protected $redirectTo = 'item/index';
+	public function redirectTO() {
+		session()->flash('message_success', 'ログインしました');
+		return '/item/index';
+	}
 
     /**
      * Create a new controller instance.
@@ -40,6 +44,7 @@ class LoginController extends Controller
     }
 	public function logout(Request $request) {
 		Auth::guard('user')->logout();
+		session()->flash('message_success', 'ログアウトしました');
 		return redirect('login');
 	}
 }

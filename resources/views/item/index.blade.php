@@ -11,8 +11,9 @@
 @endforeach
 @endif
 @if (strpos($now_route, 'admin') !== false)
-	<p><a href="{{ route('admin.item.add') }}">商品追加</a></p>
-@elseif (strpos($now_route, 'admin') !== false)
+<p><a href="{{ route('admin.item.add') }}">商品追加</a></p>
+@elseif (strpos($now_route, 'admin') === false)
+<p><a href="{{ route('cart.index') }}">カート一覧</a></p>
 @else
 @endif
 <table class="table table-striped">
@@ -33,7 +34,7 @@
 @endif
 <td>{{ $item->price }}</td>
 <td>
-@if ($item->stock > 1)
+@if ($item->stock > 0)
 在庫あり
 @else
 在庫無し
