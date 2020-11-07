@@ -16,13 +16,8 @@ class AddressController extends Controller {
 		return view('address.index', compact('addresses'));
 	}
 	public function delete(Request $request) {
-		if ($request->user_id !== Auth::id()) {
-			session()->flash('msg_error', '不正なアクセスです');
-			return redirect(route('address.index'));
-		}
 		$address_id = $request->input('address_id');
 		$this->address->soft_delete_db($address_id);
-		session()->flash('msg_success', 'お届け先住所を削除しました');
 		return redirect(route('address.index'));
 	}
 	public function add() {
@@ -30,19 +25,14 @@ class AddressController extends Controller {
 	}
 	public function create(AddressRequest $request) {
 		$query = Address::query();
-		$query->where('user_id', $request->user_id);
+		$query->where('user_id', Auth::id());
 		$query->where('postal_code', $request->postal_code);
 		$query->where('region', $request->region);
 		$query->where('city', $request->city);
 		$query->where('street', $request->street);
-		$address = $query->get();
-		if ($address) {
-			$name = $request->old('name');
-			$postal_code = $request->old('postal_code');
-			$region = $request->old('region');
-			$city = $request->old('city');
-			$street = $request->old('street');
-			$phone_number = $request->old('phone_number');
+		$query->whereNull('deleted_at');
+		$address = $query->get()->count();
+		if ($address > 0) {
 			session()->flash('msg_error', 'お届け先住所が重複しております');
 			return redirect(route('address.add'))->withInput();
 		} else {

@@ -25,8 +25,10 @@ class Address extends Model
 		if ($address->user_id == Auth::id()) {
 			$cart_id = $address->cart_id;
 			$address->delete();
+			session()->flash('msg_success', 'お届け先住所を削除しました');
 			return true;
 		}
+		session()->flash('msg_error', '不正なアクセスです');
 		return false;
 	}
 }
